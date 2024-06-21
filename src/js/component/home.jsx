@@ -1,26 +1,46 @@
-import React from "react";
+import React, { useState } from 'react';
 
-//include images into your bundle
-import rigoImage from "../../img/rigo-baby.jpg";
-
-//create your first component
 const Home = () => {
-	return (
-		<div className="text-center">
-			<h1 className="text-center mt-5">Hello Rigo!</h1>
-			<p>
-				<img src={rigoImage} />
-			</p>
-			<a href="#" className="btn btn-success">
-				If you see this green button... bootstrap is working...
-			</a>
-			<p>
-				Made by{" "}
-				<a href="http://www.4geeksacademy.com">4Geeks Academy</a>, with
-				love!
-			</p>
-		</div>
-	);
+  const [selectedColor, setSelectedColor] = useState("");
+  const [showPurple, setShowPurple] = useState(false);
+
+  const click = (color) => {
+    setSelectedColor(color);
+  };
+
+  const togglePurple = () => {
+    setShowPurple(!showPurple);
+  };
+
+  return (
+    <div className="all">
+      <div className="traffic-top"></div>
+      <div className="traffic-box">
+        <div
+          className={`red ${selectedColor === 'red' ? 'glow' : ''}`}
+          onClick={() => click('red')}
+        ></div>
+        <div
+          className={`yellow ${selectedColor === 'yellow' ? 'glow' : ''}`}
+          onClick={() => click('yellow')}
+        ></div>
+        <div
+          className={`green ${selectedColor === 'green' ? 'glow' : ''}`}
+          onClick={() => click('green')}
+        ></div>
+        {showPurple && (
+          <div
+            className={`purple ${selectedColor === 'purple' ? 'glow' : ''}`}
+            onClick={() => click('purple')}
+          ></div>
+        )}
+      </div>
+      <button id="button" onClick={togglePurple}>
+        {showPurple ? "Hide Purple Light" : "Show Purple Light"}
+      </button>
+    </div>
+  );
 };
 
 export default Home;
+
